@@ -145,7 +145,17 @@
   (package-install 'use-package))
 
 (load-theme 'solarized-dark t)
-(auto-complete-mode)
+;;(auto-complete-mode)
+
+(use-package company
+  :ensure t
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
+  :config
+  (setq company-dabbrev-downcase 0)
+  (setq company-idle-delay 0.1)
+  (setq company-minimum-prefix-length 1)
+  (setq company-tooltip-align-annotations t))
 
 ;; hide the menu bar and the tool bar
 (menu-bar-mode -1)

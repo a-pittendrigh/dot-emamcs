@@ -13,3 +13,9 @@
 - fonts
   - font size
   - fira code or something
+
+- god mode
+
+- git repo
+
+- move config to own file 

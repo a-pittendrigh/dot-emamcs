@@ -144,8 +144,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(load-theme 'solarized-dark t)
-;;(auto-complete-mode)
+;;(load-theme 'solarized-dark t)
+(load-theme 'doom-one t)
 
 (use-package company
   :ensure t
@@ -197,6 +197,12 @@
 (global-set-key (kbd "C-c m s") 'magit-status)
 ;;keymaps
 
+;; better defaults
+
+(add-to-list 'load-path "/better-defaults")
+(require 'better-defaults)
+
+
 ;; font size
 (set-face-attribute 'default nil :height 120 :family "Fira Code Retina")
 
@@ -209,8 +215,10 @@
  '(coffee-tab-width 2)
  '(custom-safe-themes
    '("6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "52588047a0fe3727e3cd8a90e76d7f078c9bd62c0b246324e557dfa5112e0d0c" default))
+ '(line-number-mode nil)
  '(package-selected-packages
-   '(helm-ag doom-themes which-key-posframe auto-complete solarized-theme magit tagedit rainbow-delimiters projectile smex ido-completing-read+ cider clojure-mode-extra-font-locking clojure-mode paredit exec-path-from-shell)))
+   '(helm-ag doom-themes which-key-posframe auto-complete solarized-theme magit tagedit rainbow-delimiters projectile smex ido-completing-read+ cider clojure-mode-extra-font-locking clojure-mode paredit exec-path-from-shell))
+ '(projectile-mode t nil (projectile)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

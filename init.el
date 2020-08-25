@@ -202,6 +202,28 @@
 (add-to-list 'load-path "/better-defaults")
 (require 'better-defaults)
 
+;; god-mode
+
+(add-to-list 'exec-path "~/bin")
+  (setq cursor-type 'bar)
+  (require 'god-mode)
+  (defun my-god-mode-update-cursor ()
+    (setq cursor-type (if (or god-local-mode buffer-read-only)
+                          'box
+                        'bar)))
+  ;;(global-set-key (kbd "<escape>") #'god-mode-all)
+  (global-set-key (kbd "C-'") 'god-mode-all)
+  (add-hook 'god-mode-enabled-hook #'my-god-mode-update-cursor)
+  (add-hook 'god-mode-disabled-hook #'my-god-mode-update-cursor)
+  (define-key god-local-mode-map (kbd ".") #'repeat)
+  (define-key god-local-mode-map (kbd "i") #'god-local-mode)
+  (global-set-key (kbd "C-x C-1") #'delete-other-windows)
+  (global-set-key (kbd "C-x C-2") #'split-window-below)
+  (global-set-key (kbd "C-x C-3") #'split-window-right)
+  (global-set-key (kbd "C-x C-0") #'delete-window)
+
+;; god-mode
+
 
 ;; font size
 (set-face-attribute 'default nil :height 120 :family "Fira Code Retina")
@@ -217,7 +239,7 @@
    '("6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "52588047a0fe3727e3cd8a90e76d7f078c9bd62c0b246324e557dfa5112e0d0c" default))
  '(line-number-mode nil)
  '(package-selected-packages
-   '(helm-ag doom-themes which-key-posframe auto-complete solarized-theme magit tagedit rainbow-delimiters projectile smex ido-completing-read+ cider clojure-mode-extra-font-locking clojure-mode paredit exec-path-from-shell))
+   '(god-mode helm-ag doom-themes which-key-posframe auto-complete solarized-theme magit tagedit rainbow-delimiters projectile smex ido-completing-read+ cider clojure-mode-extra-font-locking clojure-mode paredit exec-path-from-shell))
  '(projectile-mode t nil (projectile)))
 
 (custom-set-faces

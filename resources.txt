@@ -1,1 +1,14 @@
+base: https://www.braveclojure.com/basic-emacs/
 https://medium.com/@zac.wood9/a-beginners-emacs-config-44400bcf54a1
+
+
+Run Application without Holding up terminal
+- https://unix.stackexchange.com/questions/200169/run-application-without-holding-up-terminal
+- If you just want to use the terminal interactively again, run the command in the background by appending & after the command:
+
+  some_command &
+- If you want the application to continue functioning after closing the terminal as well, use nohup:
+
+  nohup some_command &
+
+

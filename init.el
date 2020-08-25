@@ -188,13 +188,11 @@
   :config
   (helm-projectile-on))
 
-;; keymaps
-;; find file
-(global-set-key (kbd "C-c f f") 'helm-projectile-find-file)
-;; search in project for text
-(global-set-key (kbd "C-c f t") 'helm-do-ag-project-root)
-;; magit status
-(global-set-key (kbd "C-c m s") 'magit-status)
+;; keymaps / keybindings
+(global-set-key (kbd "C-c f f") 'helm-projectile-find-file) ;; find file
+(global-set-key (kbd "C-c f t") 'helm-do-ag-project-root) ;; search in project for text
+(global-set-key (kbd "C-c m s") 'magit-status) ;; magit status
+(global-set-key (kbd "C-c p s") 'projectile-switch-project) ;; projectile switch project
 ;;keymaps
 
 ;; better defaults
@@ -203,7 +201,6 @@
 (require 'better-defaults)
 
 ;; god-mode
-
 (add-to-list 'exec-path "~/bin")
   (setq cursor-type 'bar)
   (require 'god-mode)
@@ -221,8 +218,69 @@
   (global-set-key (kbd "C-x C-2") #'split-window-below)
   (global-set-key (kbd "C-x C-3") #'split-window-right)
   (global-set-key (kbd "C-x C-0") #'delete-window)
-
 ;; god-mode
+;; js-2 mode
+(use-package js2-mode
+  :ensure t)
+
+(use-package rjsx-mode
+  :ensure t
+  :mode (("\\.js\\'" . rjsx-mode)
+         ("\\.jsx\\'" . rjsx-mode))
+  :init
+  (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+  (add-hook 'rjsx-mode-hook 'tide-mode))
+
+(use-package tide
+  :ensure t
+  :mode(("\\.ts\\'" . typescript-mode))
+  :init
+  (add-hook 'typescript-mode-hook 'tide-mode)
+  (add-hook 'typescript-mode-hook 'prettier-js-mode)
+  :config
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save-mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+;; js-2 mode
+;; prettier 
+(use-package prettier
+  :ensure t
+  :config
+  (setq prettier-js-args '("--trailing-comma" "es5"
+                           "--single-quote" "true"
+                           "--print-width" "120"
+                           "--tab-width" "4"
+                           "--use-tabs" "false"
+                           "--jsx-bracket-same-line" "false"
+                           "--stylelint-integration" "true")))
+(add-hook 'after-init-hook #'global-prettier-mode)
+;; prettier
+;; json-mode
+(use-package json-mode
+  :ensure t)
+;; json-mode 
+;; web mode
+  (setq-default
+   ;; js2-mode
+   js2-basic-offset 2
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
+
+  (with-eval-after-load 'web-mode
+    (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
+
+  (setq-default js2-basic-offset 2)
+  (setq-default js-indent-level 2)
+;; web-mode
 
 
 ;; font size
@@ -239,7 +297,7 @@
    '("6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "52588047a0fe3727e3cd8a90e76d7f078c9bd62c0b246324e557dfa5112e0d0c" default))
  '(line-number-mode nil)
  '(package-selected-packages
-   '(god-mode helm-ag doom-themes which-key-posframe auto-complete solarized-theme magit tagedit rainbow-delimiters projectile smex ido-completing-read+ cider clojure-mode-extra-font-locking clojure-mode paredit exec-path-from-shell))
+   '(prettier god-mode helm-ag doom-themes which-key-posframe auto-complete solarized-theme magit tagedit rainbow-delimiters projectile smex ido-completing-read+ cider clojure-mode-extra-font-locking clojure-mode paredit exec-path-from-shell))
  '(projectile-mode t nil (projectile)))
 
 (custom-set-faces
